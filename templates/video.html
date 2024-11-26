@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Assistir Vídeo{% endblock %}
+
+{% block content %}
+<div class="video-container">
+  <h2>{{ video.original_filename }}</h2>
+  <p>Enviado por: {{ video.user.username }}</p>
+  <video 
+    id="video-player" 
+    class="video-js vjs-default-skin vjs-big-play-centered" 
+    controls 
+    preload="auto" 
+    data-setup='{"fluid": true, "aspectRatio": "16:9"}' 
+    style="width: 100%;">
+    <source src="{{ url_for('media', filename=video.filename) }}" type="video/mp4">
+    Seu navegador não suporta o elemento de vídeo.
+  </video>
+</div>
+{% endblock %}

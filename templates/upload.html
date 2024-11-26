@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Upload de Mídia{% endblock %}
+
+{% block content %}
+<h2>Upload de Vídeo</h2>
+
+<div class="upload-form">
+  <form id="uploadForm" method="POST" action="{{ url_for('upload') }}" enctype="multipart/form-data">
+    <div class="form-group">
+      <input type="file" name="files[]" class="form-control" multiple required accept="video/*">
+    </div>
+    <button type="submit" class="btn btn-danger btn-block">Enviar</button>
+  </form>
+
+  <!-- Barra de progresso -->
+  <div class="progress mt-3" style="display: none;">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;"></div>
+  </div>
+</div>
+{% endblock %}

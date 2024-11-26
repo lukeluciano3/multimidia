@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}MeuFlix - Assista seus vídeos{% endblock %}
+
+{% block content %}
+<h2>Bem-vindo, {{ current_user.username }}!</h2>
+
+{% if videos %}
+<div class="video-grid">
+  {% for video in videos %}
+  <div class="video-card">
+    <div class="video-wrapper">
+      <a href="{{ url_for('video', filename=video.filename) }}" class="video-link">
+        <video 
+          class="video-thumbnail" 
+          src="{{ url_for('media', filename=video.filename) }}" 
+          preload="metadata" 
+          muted 
+          playsinline>
+        </video>
+      </a>
+
+      {% if current_user.username == 'admin' %}
+      <a href="{{ url_for('delete_video', video_id=video.id) }}" class="video-trash" title="Excluir vídeo">
+        <i class="fas fa-trash-alt"></i>
+      </a>
+      {% endif %}
+    </div>
+
+    <div class="video-info">
+      <div class="video-title">{{ video.original_filename }}</div>
+      <div class="video-uploader">Enviado por: {{ video.user.username }}</div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<p class="no-videos">Não foi feito upload de nenhum vídeo ainda.</p>
+{% endif %}
+{% endblock %}
